@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(248, 246, 246);
+}
+/* Navbar related css */
+
+#links {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1%;
+  box-shadow: 2px 2px 5px 5px rgb(235, 235, 235);
+}
+
+#links > div {
+  display: flex;
+  list-style: none;
+}
+#links a {
+  text-decoration: none;
+  color: teal;
+  font-size: 30px;
+}
+#submit {
+  width: 70%;
+  margin: auto;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 15px;
+}
+/* Navbar related css */
+
+/* Form related css */
+
+input,
+select {
+  display: block;
+  margin: 15px 0px;
+  font-size: 20px;
+  padding: 2%;
+}
+option {
+  font-size: 25px;
+}
+form {
+  width: 400px;
+  border: 1px solid rgb(230, 230, 230);
+  margin: 3% auto;
+  padding: 3%;
+  background: white;
+}
+/* Form related css */
+
+
+
+

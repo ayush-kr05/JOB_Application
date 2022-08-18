@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: rgb(248, 246, 246);
+}
+/* Navbar related css */
+
+#links {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1%;
+  box-shadow: 2px 2px 5px 5px rgb(235, 235, 235);
+}
+
+#links > div {
+  display: flex;
+  list-style: none;
+}
+#links a {
+  text-decoration: none;
+  color: teal;
+  font-size: 30px;
+}
+
+table,
+td,
+th {
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+table {
+  border-collapse: collapse;
+  width: 70%;
+  margin: auto;
+  margin-top: 50px;
+}
+
+th,
+td {
+  padding: 15px;
+}
+
+tr > th {
+  background-color: teal;
+  color: white;
+}
+
+.bookmark{
+  color: blue;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+.bookmark:hover{
+  color: red;
+}
+
+
+/* CSS for Select Tags */
+
+#filter{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+#filter>select{
+  margin: 15px;
+  height: 40px;
+  border-radius: 35px;
+  padding: 10px;
+  background-color: rgb(227, 222, 222);
+}
+
+#filter>select:hover{
+  background-color: white;
+}
+
+
+.deltd{
+  color: red;
+  cursor: pointer;
+}
+.deltd:hover{
+  font-weight: bolder;
+}
+
+

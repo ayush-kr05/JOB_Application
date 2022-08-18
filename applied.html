@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Database</title>
+    <link rel="stylesheet" href="commonStyles.css" />
+  </head>
+
+  <body>
+    <div id="links">
+      <div><a href="index.html">Home</a></div>
+      <div><a href="applied.html">Applied Jobs</a></div>
+      <div><a href="bookmark.html">Bookmarks</a></div>
+    </div>
+
+    <div id="filter">
+      <select name="" id="sortname" onchange="SortbyName()">
+        <option value="">Sort By Name</option>
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
+      </select>
+
+      <select name="" id="sortsalary" onchange="SortbySalary()">
+        <option value="">Sort By Salary</option>
+        <option value="HtL">High To Low</option>
+        <option value="LtH">Low To High</option>
+      </select>
+
+      <select name="" id="filterRole" onchange="FilterbyRole()">
+        <option value="">Filter by Role</option>
+        <option value="All">All</option>
+        <option value="FSD">FSD</option>
+        <option value="Frontend">Frontend</option>
+        <option value="Backend">Backend</option>
+      </select>
+
+    </div>
+
+    <main>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Job applied</th>
+            <th>Salary expected</th>
+            <th>Add to bookmark</th>
+          </tr>
+        </thead>
+        <tbody id="body">
+          <!-- Append your output to tbody -->
+        </tbody>
+      </table>
+    </main>
+  </body>
+  <script>
+    //you need to code here
+    var AppliedJobs=JSON.parse(localStorage.getItem("jobList")) ||[];
+
+
+    DisplayJobs(AppliedJobs);
+
+    function DisplayJobs(AppliedJobs){
+      document.querySelector("tbody").innerText="";
+        AppliedJobs.map(function(userInfo){
+          var row=document.createElement("tr");
+
+          var td1=document.createElement("td");
+          td1.innerText= userInfo.name;
+      
+          var td2=document.createElement("td");
+          td2.innerText= userInfo.email;
+
+          var td3=document.createElement("td");
+          td3.innerText= userInfo.role;
+
+          var td4=document.createElement("td");
+          td4.innerText= userInfo.salary;
+
+          var td5=document.createElement("td");
+          td5.innerText="Bookmark";
+          td5.setAttribute("class","bookmark")
+          td5.addEventListener("click",function(){AddToBookmark(userInfo)});
+
+          row.append(td1,td2,td3,td4,td5);
+
+          document.querySelector("tbody").append(row);
+
+        })
+        
+    }
+
+//Function for sort by name
+
+function SortbyName(){
+  var arrange=document.getElementById("sortname").value;
+
+  if(arrange=="asc"){
+    AppliedJobs.sort(function(a,b){
+      if(a.name>b.name) return 1;
+      if(a.name<b.name) return -1;
+      return 0; 
+    });
+    // console.log(AppliedJobs);
+  }
+  if(arrange=="desc"){
+    AppliedJobs.sort(function(a,b){
+      if(a.name>b.name) return -1;
+      if(a.name<b.name) return 1;
+      return 0;
+    });
+    // console.log(AppliedJobs);
+  }
+  DisplayJobs(AppliedJobs);
+  
+}
+
+// Function for sort by salary
+
+function SortbySalary(){
+  var order=document.getElementById("sortsalary").value;
+
+  if(order=="LtH"){
+    AppliedJobs.sort(function(a,b){
+      // if(a.salary - b.salary>0){
+      //   return 1;
+      // }
+      // if(a.salary - b.salary<0){
+      //   return -1;
+      // }
+      // return 0;
+             //or
+      return  a.salary - b.salary;    
+    }) 
+
+  }
+  if(order=="HtL"){
+    AppliedJobs.sort(function(a,b){
+      // if(a.salary - b.salary>0){
+      //   return -1;
+      // }
+      // if(a.salary - b.salary<0){
+      //   return 1;
+      // }
+      // return 0;
+              //or
+     
+      return b.salary - a.salary;           
+    })
+  }
+  DisplayJobs(AppliedJobs);
+}
+
+   
+   
+
+// Function for Job filtered by Roles
+
+    function FilterbyRole(){
+      var role=document.getElementById("filterRole").value;
+
+      if(role=="FSD" || role=="Frontend" || role=="Backend"){
+            var filteredRoles= AppliedJobs.filter(function(elm){
+            return role==elm.role;
+          })
+          // console.log(filteredRoles);
+
+          DisplayJobs(filteredRoles);
+      }else{
+        DisplayJobs(AppliedJobs);
+      }
+    }
+
+// Adding Data in local storage for bookmarks
+
+    var Bookmarks= JSON.parse(localStorage.getItem("bookmarks"))||[];
+    function AddToBookmark(userInfo){
+      var isPresent = Bookmarks.filter(function(elm){
+        return userInfo.email==elm.email;
+      })
+
+      if(isPresent==0){
+        Bookmarks.push(userInfo);
+        localStorage.setItem("bookmarks",JSON.stringify(Bookmarks));
+      }else{
+        alert("Bookmark Already Present");
+      }
+    }
+    
+
+
+  </script>
+</html>
